@@ -1,4 +1,4 @@
-//Thong báo đăng nhập thành cồng
+//Thong báo đăng nhập thành công
 function toast({
     title = 'Success',
     message = 'Tạo tài khoản thành công',

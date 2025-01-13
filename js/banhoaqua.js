@@ -61,7 +61,7 @@ function detailProduct(index) {
         <h2 class="product-title">${infoProduct.title}</h2>
         <div class="product-control">
             <div class="priceBox">
-                <span class="current-price">${vnd(infoProduct.price)}</span>
+                <span class="current-''rice">${vnd(infoProduct.price)}</span>
             </div>
             <div class="buttons_added">
                 <input class="minus is-form" type="button" value="-" onclick="decreasingNumber(this)">
@@ -106,12 +106,11 @@ function detailProduct(index) {
         } else {
             toast({ title: 'Warning', message: 'Chưa đăng nhập tài khoản !', type: 'warning', duration: 3000 });
         }
-
     })
     // Mua ngay san pham
     dathangngay();
 }
-
+// Hiệu ứng hiển thị số lượng sp trong giỏ hàng
 function animationCart() {
     document.querySelector(".count-product-cart").style.animation = "slidein ease 1s"
     setTimeout(()=>{
@@ -122,15 +121,16 @@ function animationCart() {
 // Them SP vao gio hang
 function addCart(index) {
     let currentuser = localStorage.getItem('currentuser') ? JSON.parse(localStorage.getItem('currentuser')) : [];
-    let soluong = document.querySelector('.input-qty').value;
-    let popupDetailNote = document.querySelector('#popup-detail-note').value;
-    let note = popupDetailNote == "" ? "Không có ghi chú" : popupDetailNote;
-    let productcart = {
-        id: index,
-        soluong: parseInt(soluong),
-        note: note
+    let soluong = document.querySelector('.input-qty').value; // lấy gtri của sp trong ô input có class .input-qty
+    let popupDetailNote = document.querySelector('#popup-detail-note').value; // lấy gtri ghi chú có id #popup-detail-note
+    let note = popupDetailNote == "" ? "Không có ghi chú" : popupDetailNote; // dùng toán tử đk để ktra nếu ghi chú rỗng thì gán gtri "ko có gtri" nếu có thì lấy ghi chú đã nhập
+    // tạo đối tượng sản phẩm trong giỏ hàng
+    let productcart = { // productcart là 1 đtg đại diện cho sp trog giỏ hàng chứ id,sl,ghi  chú
+        id: index, // id của sp đc truyền vào hàm addCart() thông qua tham số index
+        soluong: parseInt(soluong), // số lg sp lấy từ input đc chuyển thành số nguyên parseInt()
+        note: note // ghi chú cho sp, đc lấy từ biến note 
     }
-    let vitri = currentuser.cart.findIndex(item => item.id == productcart.id);
+    let vitri = currentuser.cart.findIndex(item => item.id == productcart.id); //tìm vtri của sp trong giỏ hàng, findIndex() trả về chỉ số của ptu đầu tiên trog mảng cart có id giống productcart.id. nếu ko tìm thấy hàm trả về -1
     if (vitri == -1) {
         currentuser.cart.push(productcart);
     } else {
@@ -148,7 +148,7 @@ function showCart() {
         let currentuser = JSON.parse(localStorage.getItem('currentuser'));
         if (currentuser.cart.length != 0) {
             document.querySelector('.gio-hang-trong').style.display = 'none';
-            document.querySelector('button.thanh-toan').classList.remove('disabled');
+            document.querySelector('button.thanh-toan').classList.remove('disabled');//tắt nút thực hiện chức năng thanh toán
             let productcarthtml = '';
             currentuser.cart.forEach(item => {
                 let product = getProduct(item);
@@ -223,6 +223,7 @@ function getCartTotal() {
         currentUser.cart.forEach(item => {
             let product = getProduct(item);
             tongtien += (parseInt(product.soluong) * parseInt(product.price));
+            
         });
     }
     return tongtien;
@@ -250,6 +251,8 @@ function getAmountCart() {
     currentuser.cart.forEach(element => {
         amount += parseInt(element.soluong);
     });
+    console.log(amount);
+    
     return amount;
 }
 

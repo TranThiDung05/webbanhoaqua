@@ -47,10 +47,11 @@ body::-webkit-scrollbar {
 html {
     scroll-behavior: smooth;
 }
-
-
-body {
+.main-wrapper{
     background-color: #fff;
+}
+body {
+    background-color: #ffffff !;
     position: relative;
 }
 
@@ -763,6 +764,7 @@ header {
     align-items: center;
     column-gap: 10px;
     margin-top: 10px;
+    margin-bottom: 15px;
 }
 
 .page-nav-item a {
@@ -1659,7 +1661,7 @@ input[type=number] {
 /* Css footer */
 .footer {
     background-color: #f2f2f2;
-    margin-top: 30px;
+    /*margin-top: 30px;*/
     border-top: 4px solid rgb(2, 160, 81);
 }
 
